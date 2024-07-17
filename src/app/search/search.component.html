@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div class="px-3 home-margin">
+  <div class="row">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12 pb-4" *ngFor="let movie of movies$ | async">
+      <div class="card">
+        <img [src]="movie.Poster" class="card-img-top" [alt]="movie.Title">
+        <div class="card-body">
+          <h5 class="card-title">{{ truncateTitle(movie.Title, 25) }}</h5>
+          <p class="card-text">{{ movie.Title }} is a {{ movie.Type }} that was released in {{ movie.Year }}</p>
+          <div class="buttons">
+              <a routerLink="/Movie Details" [queryParams]="{ movieId: movie.imdbID }" class="btn button">
+                Learn More
+              </a>
+              <button (click)="toggleFavorite(movie)" class="btn btn-link favorite-button">
+                <span *ngIf="isFavorite(movie)">
+                  <i class="fa-solid fa-heart" style="color: #ff0000;"></i>
+                </span>
+                <span *ngIf="!isFavorite(movie)">
+                  <i class="fa-regular fa-heart" style="color: #ff0000;"></i>
+                </span>
+              </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isModalOpen" class="modal fade show" tabindex="-1" aria-labelledby="successModalLabel" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="display: flex; justify-content: space-between;">
+        {{ successMessage }}
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+    </div>
+  </div>
+</div>

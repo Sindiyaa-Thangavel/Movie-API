@@ -1,0 +1,14 @@
+.home-margin{
+    color: white;
+}
+
+.list-group-item{
+    background: rgb(70,70,70);
+    background: linear-gradient(90deg, rgb(55, 55, 55) 0%, rgba(131,131,131,1) 78%, rgb(186, 186, 186) 100%);
+    color: white;
+}
+
+.badge{
+    padding: 0.35em 0.85em 0.35em 0 !important;
+    color: rgb(255, 221, 0);
+}

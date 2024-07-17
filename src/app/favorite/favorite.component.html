@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+
+<div class="px-3 home-margin">
+    <h2 class="pb-3">Favorite Movies</h2>
+    <div *ngIf="favoriteMovies.length === 0" class="alert" role="alert" style="display: flex; justify-content: center;">
+        <span class="material-symbols-outlined" style="color: #EA3323;">
+            warning
+            </span> <p>There are no movies added to favorites.</p>
+    </div>
+    <div class="row">
+      <div *ngFor="let movie of favoriteMovies" class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+        <div class="card">
+          <img [src]="movie.Poster" class="card-img-top" [alt]="movie.Title">
+          <div class="card-body">
+            <h5 class="card-title">{{ truncateTitle(movie.Title, 25) }}</h5>
+            <p class="card-text">{{ movie.Title }} is a {{ movie.Type }} that was released in {{ movie.Year }}</p>
+            <div class="buttons">
+              <a routerLink="/Movie Details" [queryParams]="{ movieId: movie.imdbID }" class="btn button">
+                Learn More
+              </a>
+              <button class="btn btn-link" (click)="removeFavorite(movie.id)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-solid fa-heart" style="color: #ff0000;"></i>
+            </button>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-body" style="display: flex; justify-content: space-between;">
+          Movie removed from Favorite
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

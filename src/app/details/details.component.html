@@ -1,0 +1,53 @@
+<app-navbar></app-navbar>
+
+<!-- Page Content -->
+<div class="px-3 home-margin" *ngIf="movieDetils$ | async as movie">
+    <div class="detail-head" style="display: flex; justify-content: space-between;">
+      
+      <h1 class="mt-1 mb-4 movie-title">{{ movie.Title }}
+        <small>
+          <span class="badge badge-primary">{{ movie.Rated }}</span>
+        </small>
+      </h1>
+    </div>
+  
+    <div class="row">
+  
+      <div class="col-md-4">
+        <img class="img-fluid" [src]="movie.Poster" [alt]="movie.Title">
+      </div>
+  
+      <div class="col-md-8">
+      <div *ngFor="let genre of movie.Genre.split(',')" class="badge badge-success">{{ genre.trim() }}</div>
+  
+  
+        <h3 class="my-3">Plot</h3>
+        <p>{{ movie.Plot }}</p>
+  
+        <h3 class="my-3">Ratings</h3>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let rating of movie.Ratings">{{ rating.Source }} - {{ rating.Value }}</li>
+        </ul>
+  
+        <h3 class="my-3">Plot</h3>
+        <p>{{ movie.Plot }}</p>
+      </div>
+  
+    </div>
+  
+    <div *ngIf="movie.similarMovies.length > 0">
+      <h3 class="my-4">Similar Movies</h3>
+      <div class="row">
+        <div 
+          class="col-md-3 col-sm-6 mb-4"
+          *ngFor="let similarMovie of movie.similarMovies">
+          <a 
+            routerLink="/Movie Details" [queryParams]="{ movieId: similarMovie.imdbID }" >
+            <img class="img-fluid similar-poster" [src]="similarMovie.Poster" [alt]="similarMovie.Title">
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

@@ -1,0 +1,59 @@
+.card {
+    margin-bottom: 15px;
+    min-height: 510px;
+    max-height: 550px;
+    background-color: rgba(81, 80, 80, 0.368);
+    color: #ffffff;
+    border: 1px solid rgb(172, 172, 172);
+  }
+  
+  .card:hover{
+    border: 4px solid white;
+  }
+    
+  .card-img-top {
+    height: 320px;
+    object-fit: cover;
+  }
+    
+  .btn.btn-primary {
+    position: absolute;
+    margin-bottom: 20px;
+    bottom: 0;
+  }
+  
+  .button{
+    background-color: #fe6a03 !important;
+    color: white !important;
+    border: none;
+  }
+  
+  .button:hover{
+    background-color: #be5732 !important;
+    color: white !important;
+    border: none;
+  }
+  
+  .fav{
+    justify-content: space-between;
+  }
+
+  .buttons{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1050;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal.fade.show {
+    display: block;
+  }

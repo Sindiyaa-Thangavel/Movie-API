@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+
+<!-- Carousel -->
+
+<div id="carouselExampleIndicators" class="carousel slide px-3 home-margin" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="5000">
+            <img src="https://m.media-amazon.com/images/I/91txlu5NEfL.jpg" class="d-block img-fluid" height="550px" width="100%" alt="Stranger Things">
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2021/08/money-heist-season-5.jpg" height="550px" width="100%" class="d-block img-fluid">
+        </div>
+        <div class="carousel-item" data-bs-interval="5000">
+            <img src="https://wallpapers.com/images/hd/the-avengers-in-4k-united-to-save-the-universe-wbmp983ocnwvooku.jpg" class="d-block img-fluid" height="550px" width="100%" alt="Money Heist">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<!-- recent Movie -->
+<div class="px-3 mt-4">
+    <h2 class="pb-3">Recent Movies</h2>
+    <div class="row" *ngIf="(movies$ | async) as movies">
+        <div *ngFor="let movie of movies" class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12">
+          <div class="card">
+            <img [src]="movie.Poster" class="card-img-top" [alt]="movie.Title">
+            <div class="card-body">
+              <h5 class="card-title">{{ truncateTitle(movie.Title, 25) }}</h5>
+              <p class="card-text">{{ movie.Title }} is a {{ movie.Type }} that was released in {{ movie.Year }}</p>
+              <div class="buttons">
+                  <a routerLink="/Movie Details" [queryParams]="{ movieId: movie.imdbID }" class="btn button">
+                    Learn More
+                  </a>
+                  <button (click)="toggleFavorite(movie)" class="btn btn-link favorite-button">
+                    <span *ngIf="isFavorite(movie)">
+                      <i class="fa-solid fa-heart" style="color: #ff0000;"></i>
+                    </span>
+                    <span *ngIf="!isFavorite(movie)">
+                      <i class="fa-regular fa-heart" style="color: #ff0000;"></i>
+                    </span>
+                  </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+
+<div *ngIf="isModalOpen" class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="successModalLabel" style="display: block;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body" style="display: flex; justify-content: space-between;">
+        {{ successMessage }}
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+      </div>
+    </div>
+  </div>
+</div>
